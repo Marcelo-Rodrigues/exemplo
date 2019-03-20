@@ -1,16 +1,19 @@
 import express from 'express';
 import { Menu } from './models/menu';
-const server = express();
+import cors from 'cors';
 
-server.get('/', (_, res) => {
+const server = express();
+server.use(cors());
+
+server.get('/menus', (_, res) => {
   res.send([
     {
       descricao: 'Menu 1',
-      link: '/menu1'
+      link: '/pagina1'
     },
     {
       descricao: 'Menu 2',
-      link: '/menu2'
+      link: '/pagina2'
     },
   ] as Menu[]);
 });

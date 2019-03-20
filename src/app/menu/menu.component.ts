@@ -1,27 +1,36 @@
-import { Component, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectorRef, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { Menu } from './models/menu';
+import { Menu } from './models/menu.model';
+import { MenuService } from './menu.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnDestroy {
+export class MenuComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
 
-  menus: Observable<Menu>;
+  menus: Observable<Menu[]>;
 
-  private _mobileQueryListener: () => void;
+  private mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
+    private servicoMenu: MenuService
+  ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addEventListener('change', this._mobileQueryListener);
+    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addEventListener('change', this.mobileQueryListener);
+  }
+
+  ngOnInit(): void {
+    this.menus = this.servicoMenu.obterMenus();
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeEventListener('change', this._mobileQueryListener);
+    this.mobileQuery.removeEventListener('change', this.mobileQueryListener);
   }
 }

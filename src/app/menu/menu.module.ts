@@ -1,13 +1,13 @@
+import { AppRoutingModule } from './../app-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu.component';
-import { SubMenuComponent } from './sub-menu/sub-menu.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
-import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [MenuComponent, SubMenuComponent, MenuComponent],
+  declarations: [MenuComponent, MenuComponent],
   imports: [
     CommonModule,
     LayoutModule,
@@ -16,7 +16,8 @@ import { RouterModule } from '@angular/router';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    RouterModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   exports: [
     MenuComponent
