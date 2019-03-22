@@ -1,0 +1,82 @@
+<h1>Clientes</h1>
+<button
+  mat-raised-button
+  color="primary"
+  (click)="adicionar()"
+  title="Adicionar Cliente"
+>
+  <mat-icon>add</mat-icon>
+</button>
+<table
+  cdk-table
+  [dataSource]="clientes"
+  class="mat-elevation-z8"
+  [trackBy]="obterId"
+>
+  <ng-container cdkColumnDef="botoes">
+    <th cdk-header-cell *cdkHeaderCellDef></th>
+    <td cdk-cell *cdkCellDef="let cliente">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="editar(cliente)"
+        *ngIf="cliente !== clienteEdicao"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        *ngIf="cliente === clienteEdicao"
+        (click)="salvar(cliente)"
+      >
+        <mat-icon>save</mat-icon>
+      </button>
+      <button mat-raised-button color="warn" (click)="excluir(cliente)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <!-- User name Definition -->
+  <ng-container cdkColumnDef="nome">
+    <th cdk-header-cell *cdkHeaderCellDef>Nome</th>
+    <td cdk-cell *cdkCellDef="let cliente">
+      <ng-container *ngIf="cliente !== clienteEdicao">
+        {{ cliente.nome }}
+      </ng-container>
+      <ng-container *ngIf="cliente === clienteEdicao">
+        <mat-form-field class="campo-texto">
+          <input matInput placeholder="Nome" [(ngModel)]="cliente.nome" />
+        </mat-form-field>
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <!-- Age Definition -->
+  <ng-container cdkColumnDef="telefone">
+    <th cdk-header-cell *cdkHeaderCellDef>Telefone</th>
+    <td cdk-cell *cdkCellDef="let cliente">
+      <ng-container *ngIf="cliente !== clienteEdicao">
+        {{ cliente.telefone }}
+      </ng-container>
+      <ng-container *ngIf="cliente === clienteEdicao">
+        <mat-form-field class="campo-texto">
+          <input
+            type="tel"
+            matInput
+            placeholder="Telefone"
+            [(ngModel)]="cliente.telefone"
+          />
+        </mat-form-field>
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <!-- Header and Row Declarations -->
+  <tr cdk-header-row *cdkHeaderRowDef="['botoes', 'nome', 'telefone']"></tr>
+  <tr
+    cdk-row
+    *cdkRowDef="let cliente; columns: ['botoes', 'nome', 'telefone']"
+  ></tr>
+</table>

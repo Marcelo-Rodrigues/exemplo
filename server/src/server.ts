@@ -8,8 +8,8 @@ server.use(cors());
 server.get('/menus', (_, res) => {
   res.send([
     {
-      descricao: 'Menu 1',
-      link: '/pagina1'
+      descricao: 'Clientes',
+      link: '/clientes'
     },
     {
       descricao: 'Menu 2',
