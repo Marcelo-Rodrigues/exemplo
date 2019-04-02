@@ -11,6 +11,7 @@ import { ClientesComponent } from './pagina1/clientes.component';
 import { Pagina2Component } from './pagina2/pagina2.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { FormsModule } from '@angular/forms';
+import { VisualizadorFavoritasComponent } from './pagina2/visualizador-favoritas/visualizador-favoritas.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     HomeComponent,
     ClientesComponent,
-    Pagina2Component
+    Pagina2Component,
+    VisualizadorFavoritasComponent
   ],
   imports: [
     BrowserModule,
